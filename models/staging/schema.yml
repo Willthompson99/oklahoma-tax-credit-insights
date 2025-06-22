@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_tax_credits
+    description: "Staging model for tax credit data"
+    columns:
+      - name: fiscal_year
+        description: "Fiscal year of the credit"
+        tests:
+          - not_null
+
+      - name: tax_year
+        description: "Tax year the credit was applied"
+        tests:
+          - not_null
+
+      - name: recipient_name
+        description: "Name of the recipient or business"
+        tests:
+          - not_null
+
+      - name: credit_type
+        description: "Type/category of the tax credit"
+        tests:
+          - not_null
+
+      - name: amount
+        description: "Amount of credit claimed in dollars"
+        tests:
+          - not_null
+
+      - name: credit_description
+        description: "Details or notes about the credit"

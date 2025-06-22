@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: willthompson
+    database: WILLTHOMPSON
+    schema: PUBLIC
+    tables:
+      - name: TAX_CREDITS_2023
