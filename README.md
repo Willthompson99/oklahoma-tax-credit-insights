@@ -1,8 +1,3 @@
-Here’s a professional `README.md` template tailored to your **Oklahoma Tax Credit Insights** dbt project with Snowflake and Qlik:
-
----
-
-```markdown
 # 🏛️ Oklahoma Tax Credit Insights
 
 A data transformation project built with **dbt (data build tool)** and **Snowflake**, designed to model and analyze Oklahoma's public tax credit data. The final outputs power a **Qlik dashboard** for insights into tax credit distribution and trends.
