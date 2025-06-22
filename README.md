@@ -1,42 +1,110 @@
-# Oklahoma Tax Credit Insights
+Here’s a professional `README.md` template tailored to your **Oklahoma Tax Credit Insights** dbt project with Snowflake and Qlik:
 
-A full-stack analytics pipeline using **Snowflake**, **dbt**, **BigQuery**, and **Qlik** to analyze and visualize Oklahoma tax credit data. Built to demonstrate strong data modeling, pipeline governance, and executive-ready dashboards in alignment with the **Oklahoma Tax Commission's Innovation Division**.
+---
 
-## 📊 Project Objective
+```markdown
+# 🏛️ Oklahoma Tax Credit Insights
 
-Analyze trends, anomalies, and overutilization in tax credit claims across Oklahoma by:
-- Aggregating and cleansing raw tax credit data
-- Modeling insights with DBT in Snowflake
-- Enriching data via BigQuery public datasets
-- Building an interactive Qlik dashboard for KPIs and drilldowns
+A data transformation project built with **dbt (data build tool)** and **Snowflake**, designed to model and analyze Oklahoma's public tax credit data. The final outputs power a **Qlik dashboard** for insights into tax credit distribution and trends.
 
-## 🔧 Tech Stack
+---
 
-| Tool        | Role                              |
-|-------------|-----------------------------------|
-| **Snowflake** | Cloud data warehouse (raw + marts) |
-| **DBT**       | Transformations + testing          |
-| **BigQuery**  | Public dataset joins (economic, geo) |
-| **Qlik**      | Visual storytelling + compliance insights |
-
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```
-├── data/                    # Source CSVs (e.g., tax_credits_2023.csv)
+
+oklahoma-tax-credit-insights/
 ├── models/
 │   ├── staging/
-│   │   └── stg_tax_credits.sql
+│   │   ├── stg\_tax\_credits.sql         # Initial cleaned and renamed base model
+│   │   ├── schema.yml                  # Column-level tests and docs
+│   │   └── sources.yml                 # Source table declaration
 │   └── marts/
-│       └── mart_credit_summary.sql
-├── schema.yml
-├── dbt_project.yml
-├── notebooks/              # Optional: ML or analysis scripts
-└── README.md
+│       ├── mart\_credit\_summary.sql     # Total claims per year/type
+│       └── mart\_top\_recipients.sql     # Highest claim recipients
+├── macros/                             # (optional) Custom dbt macros
+├── tests/                              # (optional) Custom schema or data tests
+├── analysis/                           # (optional) Ad hoc queries
+├── data/                               # (optional) Seed files
+├── dbt\_project.yml                     # dbt project config
+├── README.md                           # 📄 You're here!
+
+````
+
+---
+
+## 🔧 Setup
+
+### Requirements
+- dbt v1.0+  
+- Snowflake account & credentials  
+- Qlik (for visualization)
+
+### Snowflake Connection
+Update your `profiles.yml`:
+```yaml
+oklahoma_tax_credit_insights:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: <your_account>
+      user: <your_username>
+      password: <your_password>
+      role: ACCOUNTADMIN
+      database: WILLTHOMPSON
+      warehouse: COMPUTE_WH
+      schema: PUBLIC
+````
+
+---
+
+## ▶️ Commands
+
+```bash
+# Run all models
+dbt run
+
+# Run tests
+dbt test
+
+# Generate & open documentation
+dbt docs generate
+dbt docs serve
 ```
 
-## 📈 Example Metrics (Qlik)
+---
 
-- Total credits claimed by year & type
-- County-level heatmap of claim volume
-- Flagged anomalies or large claims
-- Year-over-year program growth
+## 📊 Dashboards
+
+Qlik is used to visualize:
+
+* Total claimed tax credits by year and type
+* Top credit recipients
+* County- or entity-level distribution (optional extension)
+
+---
+
+## 🧪 Tests & Documentation
+
+All models include:
+
+* **Not null tests** for key fields
+* **Accepted value tests** on fiscal/tax years
+* **Descriptions** for each column and model
+
+---
+
+## ✨ Future Ideas
+
+* Add new marts for county-level aggregation
+* Integrate demographic overlays (optional)
+* Automate Qlik app refresh with dbt Cloud or Airflow
+
+---
+
+## 📬 Author
+
+**William Thompson**
+📍 Oklahoma City, OK
+🔗 [GitHub](https://github.com/Willthompson99)
