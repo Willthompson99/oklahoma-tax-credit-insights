@@ -1,0 +1,20 @@
+name: oklahoma_tax_credit_insights
+version: '1.0'
+config-version: 2
+
+profile: default
+
+model-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+data-paths: ["data"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  oklahoma_tax_credit_insights:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
