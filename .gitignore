@@ -1,0 +1,18 @@
+# DBT & Snowflake
+*.log
+dbt_packages/
+target/
+dbt_modules/
+profiles.yml
+
+# VSCode
+.vscode/
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Jupyter / Python (if you add ML)
+.ipynb_checkpoints/
+*.pyc
+__pycache__/
