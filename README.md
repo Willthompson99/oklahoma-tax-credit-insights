@@ -1,105 +1,81 @@
-# 🏛️ Oklahoma Tax Credit Insights
+# Oklahoma Tax Credit Insights
 
-A data transformation project built with **dbt (data build tool)** and **Snowflake**, designed to model and analyze Oklahoma's public tax credit data. The final outputs power a **Qlik dashboard** for insights into tax credit distribution and trends.
+This project analyzes public tax credit data from the Oklahoma state government using dbt, Snowflake, and (optionally) Qlik Cloud.
+
+## 📊 Project Goals
+
+- Understand trends in tax credit utilization across industries and credit types.
+- Transform raw tax credit data into clean, analysis-ready models.
+- Provide reusable, tested dbt transformations to power data visualization.
+
+## 🛠️ Tech Stack
+
+- **Data Warehouse**: Snowflake
+- **Transformation**: dbt (Data Build Tool)
+- **Visualization**: Qlik (optional; intended for future dashboarding)
+- **Source Data**: [Oklahoma OpenGov Portal](https://data.ok.gov)
+
+---
+
+## 🧱 DBT Models
+
+### Staging
+
+- `stg_tax_credits.sql`: Cleans and standardizes raw input.
+
+### Marts
+
+- `mart_credits_summary.sql`: Total credit amount per credit type per year.
+- `mart_credits_by_industry.sql`: Credit totals by industry and fiscal year.
+- `mart_credit_trends.sql`: Trends in volume and value of claims per credit type.
+- `mart_credit_utilization_rate.sql`: Estimated utilization rates vs. max allocation.
+- `mart_credit_distribution.sql`: Distribution of credit claims by dollar range.
 
 ---
 
 ## 📁 Project Structure
 
 ```
-
 oklahoma-tax-credit-insights/
 ├── models/
 │   ├── staging/
-│   │   ├── stg\_tax\_credits.sql         # Initial cleaned and renamed base model
-│   │   ├── schema.yml                  # Column-level tests and docs
-│   │   └── sources.yml                 # Source table declaration
+│   │   └── stg_tax_credits.sql
 │   └── marts/
-│       ├── mart\_credit\_summary.sql     # Total claims per year/type
-│       └── mart\_top\_recipients.sql     # Highest claim recipients
-├── macros/                             # (optional) Custom dbt macros
-├── tests/                              # (optional) Custom schema or data tests
-├── analysis/                           # (optional) Ad hoc queries
-├── data/                               # (optional) Seed files
-├── dbt\_project.yml                     # dbt project config
-├── README.md                           # 📄 You're here!
-
-````
-
----
-
-## 🔧 Setup
-
-### Requirements
-- dbt v1.0+  
-- Snowflake account & credentials  
-- Qlik (for visualization)
-
-### Snowflake Connection
-Update your `profiles.yml`:
-```yaml
-oklahoma_tax_credit_insights:
-  target: dev
-  outputs:
-    dev:
-      type: snowflake
-      account: <your_account>
-      user: <your_username>
-      password: <your_password>
-      role: ACCOUNTADMIN
-      database: WILLTHOMPSON
-      warehouse: COMPUTE_WH
-      schema: PUBLIC
-````
-
----
-
-## ▶️ Commands
-
-```bash
-# Run all models
-dbt run
-
-# Run tests
-dbt test
-
-# Generate & open documentation
-dbt docs generate
-dbt docs serve
+│       ├── mart_credits_summary.sql
+│       ├── mart_credits_by_industry.sql
+│       ├── mart_credit_trends.sql
+│       ├── mart_credit_utilization_rate.sql
+│       └── mart_credit_distribution.sql
+├── dbt_project.yml
+├── schema.yml
+└── README.md
 ```
 
 ---
 
-## 📊 Dashboards
+## 🧪 Testing
 
-Qlik is used to visualize:
+Run basic tests:
 
-* Total claimed tax credits by year and type
-* Top credit recipients
-* County- or entity-level distribution (optional extension)
-
----
-
-## 🧪 Tests & Documentation
-
-All models include:
-
-* **Not null tests** for key fields
-* **Accepted value tests** on fiscal/tax years
-* **Descriptions** for each column and model
+```bash
+dbt test
+```
 
 ---
 
-## ✨ Future Ideas
+## 📈 Dashboard
 
-* Add new marts for county-level aggregation
-* Integrate demographic overlays (optional)
-* Automate Qlik app refresh with dbt Cloud or Airflow
+Data is structured to support a Qlik Cloud dashboard (or alternative BI tools). Key metrics include:
+
+- Total credits claimed
+- Claim distribution by industry and fiscal year
+- Trends in credit usage
+- Utilization percentages (if limits known)
 
 ---
 
-## 📬 Author
+## 🙌 Future Improvements
 
-**William Thompson**
-📍 Oklahoma City, OK
-🔗 [GitHub](https://github.com/Willthompson99)
+- Add dbt tests for nulls, ranges, and uniqueness
+- Visual dashboard once Qlik access is available
+- Incorporate additional datasets (economic impact, employment data, etc.)
