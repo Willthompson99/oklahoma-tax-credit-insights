@@ -16,3 +16,4 @@ Thumbs.db
 .ipynb_checkpoints/
 *.pyc
 __pycache__/
+.env
