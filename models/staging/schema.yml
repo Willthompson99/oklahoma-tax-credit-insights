@@ -5,6 +5,6 @@ sources:
     database: WILLTHOMPSON
     schema: PUBLIC
     tables:
-      - name: stg_tax_credits
-        identifier: STG_TAX_CREDITS
+      - name: raw_tax_credits
+        identifier: RAW_TAX_CREDITS  # Update this to match your actual raw table name
         description: "Raw Oklahoma tax credits data"

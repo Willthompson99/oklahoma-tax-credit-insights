@@ -3,7 +3,7 @@ version: '1.0'
 config-version: 2
 
 # which profile to use from ~/.dbt/profiles.yml
-profile: dev
+profile: default
 
 # where your models live, relative to repo root:
 model-paths: ["models"]

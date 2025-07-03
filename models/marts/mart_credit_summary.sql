@@ -7,3 +7,4 @@ SELECT
   AVG(amount) AS average_amount
 FROM {{ ref('stg_tax_credits') }}
 GROUP BY fiscal_year
+ORDER BY fiscal_year

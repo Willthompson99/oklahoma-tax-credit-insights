@@ -15,4 +15,5 @@ SELECT
   y.year_total,
   ROUND(a.amount / y.year_total * 100, 2) AS utilization_pct
 FROM {{ ref('stg_tax_credits') }} AS a
-JOIN yearly_totals AS y USING (fiscal_year)
+JOIN yearly_totals AS y ON a.fiscal_year = y.fiscal_year
+ORDER BY a.fiscal_year, a.amount DESC

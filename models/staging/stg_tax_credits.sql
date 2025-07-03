@@ -7,4 +7,4 @@ SELECT
   CREDIT_TYPE,
   AMOUNT,
   CREDIT_DESCRIPTION
-FROM {{ source('willthompson', 'stg_tax_credits') }}
+FROM {{ source('willthompson', 'raw_tax_credits') }}
