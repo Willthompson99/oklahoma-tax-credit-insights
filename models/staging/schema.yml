@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: willthompson
+    database: WILLTHOMPSON
+    schema: PUBLIC
+    tables:
+      - name: stg_tax_credits
+        identifier: STG_TAX_CREDITS
+        description: "Raw Oklahoma tax credits data"

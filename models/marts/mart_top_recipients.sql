@@ -1,15 +1,10 @@
-with credits as (
-    select * from {{ ref('stg_tax_credits') }}
-),
+{{ config(materialized='view') }}
 
-top_recipients as (
-    select
-        recipient_name,
-        sum(amount::float) as total_claimed
-    from credits
-    group by recipient_name
-    order by total_claimed desc
-    limit 10
-)
-
-select * from top_recipients
+SELECT
+  recipient_name,
+  COUNT(*)    AS claim_count,
+  SUM(amount) AS total_amount
+FROM {{ ref('stg_tax_credits') }}
+GROUP BY recipient_name
+ORDER BY total_amount DESC
+LIMIT 10

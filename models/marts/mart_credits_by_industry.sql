@@ -1,6 +1,8 @@
+{{ config(materialized='view') }}
+
 SELECT
-  industry,
-  fiscal_year,
-  SUM(credit_amount) AS total_credits
+  credit_type  AS industry,
+  COUNT(*)      AS claim_count,
+  SUM(amount)   AS total_amount
 FROM {{ ref('stg_tax_credits') }}
-GROUP BY industry, fiscal_year
+GROUP BY credit_type

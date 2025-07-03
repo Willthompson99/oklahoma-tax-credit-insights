@@ -1,18 +1,9 @@
-with credits as (
+{{ config(materialized='view') }}
 
-    select * from {{ ref('stg_tax_credits') }}
-
-),
-
-summary as (
-
-    select
-        credit_type,
-        fiscal_year,
-        sum(amount) as total_claimed
-    from credits
-    group by 1, 2
-
-)
-
-select * from summary
+SELECT
+  fiscal_year,
+  COUNT(*)    AS total_claims,
+  SUM(amount) AS total_amount,
+  AVG(amount) AS average_amount
+FROM {{ ref('stg_tax_credits') }}
+GROUP BY fiscal_year

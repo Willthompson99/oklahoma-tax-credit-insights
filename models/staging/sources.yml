@@ -5,4 +5,5 @@ sources:
     database: WILLTHOMPSON
     schema: PUBLIC
     tables:
-      - name: TAX_CREDITS_2023
+      - name: stg_tax_credits
+        identifier: STG_TAX_CREDITS

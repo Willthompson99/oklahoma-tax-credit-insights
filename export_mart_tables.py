@@ -1,9 +1,3 @@
-"""
-export_mart_tables.py
-Pull every mart-level table from Snowflake → CSVs for Power BI
-Run:  python export_mart_tables.py
-"""
-
 from pathlib import Path
 from datetime import datetime
 import os
@@ -11,12 +5,10 @@ import pandas as pd
 import snowflake.connector
 from dotenv import load_dotenv
 
-# --------------------------------------------------------------------- #
-# 1) Load Snowflake creds from .env                                     #
-# --------------------------------------------------------------------- #
-load_dotenv()                      # reads .env in current directory
+# Load credentials from .env
+load_dotenv()
 
-SF_ACCOUNT   = os.getenv("SF_ACCOUNT")      # fhsaoto-ui58547
+SF_ACCOUNT   = os.getenv("SF_ACCOUNT")
 SF_USER      = os.getenv("SF_USER")
 SF_PASSWORD  = os.getenv("SF_PASSWORD")
 SF_WAREHOUSE = os.getenv("SF_WAREHOUSE")
@@ -24,44 +16,52 @@ SF_DATABASE  = os.getenv("SF_DATABASE")
 SF_SCHEMA    = os.getenv("SF_SCHEMA")
 SF_ROLE      = os.getenv("SF_ROLE")
 
-# --------------------------------------------------------------------- #
-# 2) Connect to Snowflake                                               #
-# --------------------------------------------------------------------- #
-conn = snowflake.connector.connect(
-    account   = SF_ACCOUNT,
-    user      = SF_USER,
-    password  = SF_PASSWORD,
-    warehouse = SF_WAREHOUSE,
-    database  = SF_DATABASE,
-    schema    = SF_SCHEMA,
-    role      = SF_ROLE,
-)
 
-# --------------------------------------------------------------------- #
-# 3) Tables you want to export (add/remove as needed)                   #
-# --------------------------------------------------------------------- #
-tables = [
-    "mart_credit_summary",
-    "mart_top_recipients",
-    "mart_credit_distribution",
-    "mart_credit_trends",
-    "mart_credit_utilization_rate",
-    "mart_credits_by_industry",
-]
+def get_connection():
+    """Establish and return a Snowflake connection."""
+    conn = snowflake.connector.connect(
+        user=SF_USER,
+        password=SF_PASSWORD,
+        account=SF_ACCOUNT,
+        warehouse=SF_WAREHOUSE,
+        database=SF_DATABASE,
+        schema=SF_SCHEMA,
+        role=SF_ROLE
+    )
+    return conn
 
-# --------------------------------------------------------------------- #
-# 4) Export loop                                                        #
-# --------------------------------------------------------------------- #
-export_dir = Path("data/exports")
-export_dir.mkdir(parents=True, exist_ok=True)
-stamp = datetime.now().strftime("%Y%m%d")
 
-for tbl in tables:
-    query = f'SELECT * FROM "{tbl}"'
+def export_table(table_name: str, conn, output_dir: Path):
+    """
+    Query `table_name` from Snowflake, load into a DataFrame,
+    and write out as CSV into `output_dir`.
+    """
+    query = f"SELECT * FROM {SF_DATABASE}.{SF_SCHEMA}.{table_name}"
     df = pd.read_sql(query, conn)
-    outfile = export_dir / f"{tbl}_{stamp}.csv"
-    df.to_csv(outfile, index=False)
-    print(f"✔  Exported {tbl} → {outfile.relative_to(Path.cwd())}")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    csv_path = output_dir / f"{table_name}.csv"
+    df.to_csv(csv_path, index=False)
+    print(f"✔ Exported {table_name} → {csv_path}")
 
-conn.close()
-print("\nAll done.")
+
+def main():
+    conn = get_connection()
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
+    output_dir = Path("data") / "marts_exports" / timestamp
+
+    tables = [
+        "MART_CREDIT_DISTRIBUTION",
+        "MART_CREDIT_SUMMARY",
+        "MART_CREDIT_TRENDS",
+        "MART_CREDIT_UTILIZATION_RATE",
+        "MART_CREDITS_BY_INDUSTRY",
+        "MART_TOP_RECIPIENTS",
+    ]
+    for tbl in tables:
+        export_table(tbl, conn, output_dir)
+
+    conn.close()
+
+
+if __name__ == "__main__":
+    main()
