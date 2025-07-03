@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: willthompson        # this is the “source name” you’ll use in your SQL
+    database: WILLTHOMPSON
+    schema: PUBLIC
+    tables:
+      - name: tax_credits_2023   # this is the name you’ll use in your SQL
+        identifier: TAX_CREDITS_2023
+        description: "Raw Oklahoma tax credits data"

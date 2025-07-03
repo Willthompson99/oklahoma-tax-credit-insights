@@ -1,10 +1,18 @@
 version: 2
 
-sources:
-  - name: willthompson
-    database: WILLTHOMPSON
-    schema: PUBLIC
-    tables:
-      - name: tax_credits_2023
-        identifier: TAX_CREDITS_2023  # Changed from RAW_TAX_CREDITS to TAX_CREDITS_2023
-        description: "Raw Oklahoma tax credits data"
+models:
+  - name: stg_tax_credits
+    description: "Cleaned, comma-stripped staging view of the OK tax credits dataset"
+    columns:
+      - name: fiscal_year
+        description: "Fiscal year as a string (e.g. ‘FY25’)"
+      - name: tax_year
+        description: "Numeric calendar year of the credit"
+      - name: recipient_name
+        description: "Name of the credit recipient"
+      - name: credit_type
+        description: "Category or type of the credit"
+      - name: amount
+        description: "Credit amount, cast to decimal(15,2)"
+      - name: credit_description
+        description: "Free-text description of the credit"
