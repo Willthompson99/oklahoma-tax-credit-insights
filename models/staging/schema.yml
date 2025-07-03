@@ -5,6 +5,6 @@ sources:
     database: WILLTHOMPSON
     schema: PUBLIC
     tables:
-      - name: raw_tax_credits
-        identifier: RAW_TAX_CREDITS  # Update this to match your actual raw table name
+      - name: tax_credits_2023
+        identifier: TAX_CREDITS_2023  # Changed from RAW_TAX_CREDITS to TAX_CREDITS_2023
         description: "Raw Oklahoma tax credits data"
