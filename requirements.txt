@@ -1,0 +1,27 @@
+# Core dependencies for Oklahoma Tax Credit Insights pipeline
+pandas>=1.5.0
+snowflake-connector-python>=3.0.0
+python-dotenv>=1.0.0
+
+# Data processing and analysis
+numpy>=1.21.0
+sqlalchemy>=1.4.0
+
+# Development and testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Documentation
+mkdocs>=1.4.0
+mkdocs-material>=8.0.0
+
+# Code quality
+black>=22.0.0
+flake8>=5.0.0
+isort>=5.0.0
+
+# Optional: For enhanced data validation
+great-expectations>=0.15.0
+
+# Optional: For advanced data manipulation
+polars>=0.18.0
