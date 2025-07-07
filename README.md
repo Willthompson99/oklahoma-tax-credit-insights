@@ -2,13 +2,13 @@
 
 This project analyzes public tax credit data from the Oklahoma state government using dbt, Snowflake, and (optionally) Qlik Cloud.
 
-## 📊 Project Goals
+## Project Goals
 
 - Understand trends in tax credit utilization across industries and credit types.
 - Transform raw tax credit data into clean, analysis-ready models.
 - Provide reusable, tested dbt transformations to power data visualization.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Data Warehouse**: Snowflake
 - **Transformation**: dbt (Data Build Tool)
@@ -17,7 +17,7 @@ This project analyzes public tax credit data from the Oklahoma state government 
 
 ---
 
-## 🧱 DBT Models
+## DBT Models
 
 ### Staging
 
@@ -33,7 +33,7 @@ This project analyzes public tax credit data from the Oklahoma state government 
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 oklahoma-tax-credit-insights/
@@ -53,7 +53,7 @@ oklahoma-tax-credit-insights/
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Run basic tests:
 
@@ -63,7 +63,7 @@ dbt test
 
 ---
 
-## 📈 Dashboard
+## Dashboard
 
 Data is structured to support a Qlik Cloud dashboard (or alternative BI tools). Key metrics include:
 
@@ -74,7 +74,7 @@ Data is structured to support a Qlik Cloud dashboard (or alternative BI tools). 
 
 ---
 
-## 🙌 Future Improvements
+## Future Improvements
 
 - Add dbt tests for nulls, ranges, and uniqueness
 - Visual dashboard once Qlik access is available
