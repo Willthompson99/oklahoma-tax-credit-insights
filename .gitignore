@@ -12,7 +12,7 @@ profiles.yml
 .DS_Store
 Thumbs.db
 
-# Jupyter / Python (if you add ML)
+# Python
 .ipynb_checkpoints/
 *.pyc
 __pycache__/
