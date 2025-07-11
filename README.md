@@ -302,9 +302,3 @@ For questions, issues, or feature requests:
 - 📧 Email: [will.thompson@example.com](mailto:will.thompson@example.com)
 - 🐙 GitHub Issues: [Create an issue](https://github.com/Willthompson99/oklahoma-tax-credit-insights/issues)
 - 💬 Discussions: [Join the conversation](https://github.com/Willthompson99/oklahoma-tax-credit-insights/discussions)
-
----
-
-<div align="center">
-  <strong>Built with ❤️ for data-driven insights</strong>
-</div>
